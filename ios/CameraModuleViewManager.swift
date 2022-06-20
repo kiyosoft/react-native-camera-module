@@ -1,32 +1,72 @@
+import NextLevel
+import AVFoundation
+import UIKit
+import Foundation
+import React
+
 @objc(CameraModuleViewManager)
 class CameraModuleViewManager: RCTViewManager {
-
-  override func view() -> (CameraModuleView) {
-    return CameraModuleView()
-  }
+    
+    override func view() -> UIView! {
+        return CameraView()
+    }
+    
+    override var methodQueue: DispatchQueue! {
+        return DispatchQueue.main
+    }
+    
+    @objc
+    final func start(_ node: NSNumber) {
+        let component = getCameraView(withTag: node)
+        component.start()
+    }
+    
+    
+    @objc
+    final func stop(_ node: NSNumber) {
+        let component = getCameraView(withTag: node)
+        component.stop()
+    }
+    
+    @objc
+    final func startRecording(_ node: NSNumber, options: NSDictionary, onRecordCallback: @escaping RCTResponseSenderBlock) {
+        let component = getCameraView(withTag: node)
+        component.startCapture(options: options, callback: onRecordCallback)
+    }
+    
+    @objc
+    final func stopRecording(_ node: NSNumber) {
+        let component = getCameraView(withTag: node)
+        component.endCapture()
+    }
+    
+    @objc
+    final func pauseRecording(_ node: NSNumber) {
+        let component = getCameraView(withTag: node)
+        component.pauseCapture()
+    }
+    
+    @objc
+    final func getDevices(_ node: NSNumber, position: String, devicesList: @escaping RCTResponseSenderBlock) {
+        let component = getCameraView(withTag: node)
+        let callback = Callback(devicesList);
+        callback.resolve(component.getSupportedDevices(position: position))
+    }
+    
+    private func getCameraView(withTag tag: NSNumber) -> CameraView {
+        return self.bridge.uiManager.view(forReactTag: tag) as! CameraView
+    }
 }
 
-class CameraModuleView : UIView {
-
-  @objc var color: String = "" {
-    didSet {
-      self.backgroundColor = hexStringToUIColor(hexColor: color)
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
     }
-  }
-
-  func hexStringToUIColor(hexColor: String) -> UIColor {
-    let stringScanner = Scanner(string: hexColor)
-
-    if(hexColor.hasPrefix("#")) {
-      stringScanner.scanLocation = 1
-    }
-    var color: UInt32 = 0
-    stringScanner.scanHexInt32(&color)
-
-    let r = CGFloat(Int(color >> 16) & 0x000000FF)
-    let g = CGFloat(Int(color >> 8) & 0x000000FF)
-    let b = CGFloat(Int(color) & 0x000000FF)
-
-    return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
-  }
 }

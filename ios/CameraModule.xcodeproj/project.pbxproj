@@ -6,13 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* CameraModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* CameraModule.m */; };
-		F4FF95D7245B92E800C19C63 /*  CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  CameraModule.swift */; };
-
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -27,11 +20,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libCameraModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCameraModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
-		B3E7B5891CC2AC0600A0062D /* CameraModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraModule.m; sourceTree = "<group>"; };
+		E2A2962F2858811400DBD34E /* FocusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusIndicatorView.swift; sourceTree = "<group>"; };
+		E2B141102857DFDB00C99A14 /* CameraModuleViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraModuleViewManager.m; sourceTree = "<group>"; };
+		E2B141112857DFDB00C99A14 /* CameraModuleViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModuleViewManager.swift; sourceTree = "<group>"; };
+		E2C245F0285871CB00C68D89 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* CameraModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CameraModule-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4FF95D6245B92E800C19C63 /* CameraModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModule.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +49,11 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
-				F4FF95D6245B92E800C19C63 /* CameraModule.swift */,
-				B3E7B5891CC2AC0600A0062D /* CameraModule.m */,
+				E2A2962F2858811400DBD34E /* FocusIndicatorView.swift */,
+				E2C245F0285871CB00C68D89 /* CameraViewController.swift */,
+				E2B141102857DFDB00C99A14 /* CameraModuleViewManager.m */,
+				E2B141112857DFDB00C99A14 /* CameraModuleViewManager.swift */,
 				F4FF95D5245B92E700C19C63 /* CameraModule-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,6 +74,8 @@
 			dependencies = (
 			);
 			name = CameraModule;
+			packageProductDependencies = (
+			);
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libCameraModule.a */;
 			productType = "com.apple.product-type.library.static";
@@ -108,6 +103,8 @@
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
+			packageReferences = (
+			);
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
 			projectRoot = "";
@@ -122,10 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				F4FF95D7245B92E800C19C63 /* CameraModule.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* CameraModule.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,11 +231,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CameraModule;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "CameraModule-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
@@ -259,10 +250,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CameraModule;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "CameraModule-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};

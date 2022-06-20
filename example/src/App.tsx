@@ -1,25 +1,30 @@
 import * as React from 'react';
-
-import { StyleSheet, View } from 'react-native';
-import { CameraModuleView } from 'react-native-camera-module';
+import CameraView, { RefMethods } from '../../src/CameraView';
+import { useEffect, useRef } from 'react';
 
 export default function App() {
+  const ref = useRef<RefMethods>();
+
+  useEffect(() => {
+    console.log(
+      ref.current?.getSupportedDevices('back', (devices: any) => {
+        console.log(devices);
+      })
+    );
+    setTimeout(() => {
+      ref.current?.stop();
+    }, 2000);
+    setTimeout(() => {
+      ref.current?.start();
+    }, 4000);
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <CameraModuleViewManager color="#32a852" style={styles.box} />
-    </View>
+    <CameraView
+      device={'back'}
+      ref={ref}
+      zoom={3.1}
+      deviceType={'wide-angle-camera'}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});

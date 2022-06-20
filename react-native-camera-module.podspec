@@ -16,4 +16,6 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
+  s.dependency "NextLevel", "~> 0.16.3"
+  s.dependency "Player", "~> 0.13.2"
 end
