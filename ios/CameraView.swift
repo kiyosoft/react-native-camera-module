@@ -19,14 +19,12 @@ class CameraView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initViews()
         initCameraSession()
         initDeligates()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        initViews()
         initCameraSession()
         initDeligates()
     }
@@ -65,14 +63,15 @@ class CameraView: UIView {
         }
     }
 
-    @objc var zoom: Float = 1.0 {
+    @objc var zoom: String = "1.0" {
         didSet {
-            NextLevel.shared.videoZoomFactor = zoom
+            print(zoom)
+            NextLevel.shared.videoZoomFactor = (zoom as NSString).floatValue
         }
     }
 
 
-    @objc var deviceType: String = "ultra-wide-angle-camera" {
+    @objc var deviceType: String = "wide-angle-camera" {
         didSet {
             if(deviceType == "ultra-wide-angle-camera") {
                 do {
@@ -80,7 +79,7 @@ class CameraView: UIView {
                 }catch {
 
                 }
-            } else {
+            } else if(deviceType == "wide-angle-camera") {
                 do {
                     try NextLevel.shared.changeCaptureDeviceIfAvailable(captureDevice: .wideAngleCamera)
                 }catch {
@@ -111,7 +110,7 @@ class CameraView: UIView {
     private func initCameraSession() {
         let nextLevel = NextLevel.shared
 
-        nextLevel.videoStabilizationMode = .auto
+        nextLevel.videoStabilizationMode = .standard
         nextLevel.deviceOrientation = .portrait
         nextLevel.videoConfiguration.preset = .hd1280x720
         if #available(iOS 11.0, *) {
@@ -122,11 +121,7 @@ class CameraView: UIView {
                 nextLevel.videoConfiguration.codec = .h264
             }
         }
-        do {
-            try nextLevel.changeCaptureDeviceIfAvailable(captureDevice: .ultraWideAngleCamera)
-        } catch {
 
-        }
         if NextLevel.authorizationStatus(forMediaType: AVMediaType.video) == .authorized &&
             NextLevel.authorizationStatus(forMediaType: AVMediaType.audio) == .authorized {
             do {
@@ -174,6 +169,45 @@ class CameraView: UIView {
         let nextLevel = NextLevel.shared
 
         nextLevel.videoDelegate = self
+        nextLevel.delegate = self
+    }
+}
+
+extension CameraView: NextLevelDelegate {
+    func nextLevel(_ nextLevel: NextLevel, didUpdateVideoConfiguration videoConfiguration: NextLevelVideoConfiguration) {
+
+    }
+
+    func nextLevel(_ nextLevel: NextLevel, didUpdateAudioConfiguration audioConfiguration: NextLevelAudioConfiguration) {
+
+    }
+
+    func nextLevelSessionWillStart(_ nextLevel: NextLevel) {
+
+    }
+
+    func nextLevelSessionDidStart(_ nextLevel: NextLevel) {
+        initViews()
+    }
+
+    func nextLevelSessionDidStop(_ nextLevel: NextLevel) {
+
+    }
+
+    func nextLevelSessionWasInterrupted(_ nextLevel: NextLevel) {
+
+    }
+
+    func nextLevelSessionInterruptionEnded(_ nextLevel: NextLevel) {
+
+    }
+
+    func nextLevelCaptureModeWillChange(_ nextLevel: NextLevel) {
+
+    }
+
+    func nextLevelCaptureModeDidChange(_ nextLevel: NextLevel) {
+
     }
 }
 
@@ -283,10 +317,7 @@ extension CameraView {
 
             let callback = Callback(jsCallbackFunc!)
 
-            NextLevel.shared.pause()
-
-
-            if session.clips.count > 0 {
+            if session.clips.count > 1 {
                 session.mergeClips(usingPreset: AVAssetExportPresetHighestQuality, completionHandler: { (url: URL?, error: Error?) in
                     if let url = url {
                         if(self.saveVideoToCameraRoll) {
@@ -468,5 +499,4 @@ extension CameraView {
 
         })
     }
-
 }

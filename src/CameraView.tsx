@@ -69,11 +69,8 @@ const CameraView: React.FC<CameraViewProps> = forwardRef(
   ({ torch, device, style, zoom, deviceType }, parentRef) => {
     const ref = useRef<any>();
 
-    console.log(zoom);
-
     const handle = () => {
       const nodeHandle = findNodeHandle(ref?.current);
-      console.log(nodeHandle);
       if (nodeHandle == null || nodeHandle === -1) {
         throw new Error(
           'system/view-not-found' +
