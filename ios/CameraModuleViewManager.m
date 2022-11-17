@@ -6,7 +6,7 @@ RCT_EXPORT_VIEW_PROPERTY(device, NSString)
 RCT_EXPORT_VIEW_PROPERTY(flash, NSString)
 RCT_EXPORT_VIEW_PROPERTY(torch, NSString)
 RCT_EXPORT_VIEW_PROPERTY(deviceType, NSString)
-RCT_EXPORT_VIEW_PROPERTY(zoom, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(zoom, NSString)
 
 // Camera View Functions
 RCT_EXTERN_METHOD(start:(nonnull NSNumber *)node);

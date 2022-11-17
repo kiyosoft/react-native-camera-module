@@ -12,8 +12,8 @@ export interface CameraViewProps {
   torch?: 'on' | 'off' | 'auto';
   device?: 'back' | 'front';
   style?: ViewStyle;
-  zoom?: number;
-  deviceType: 'ultra-wide-angle-camera' | 'wide-angle-camera';
+  zoom?: string;
+  deviceType: 'ultra-wide-angle-camera' | 'wide-angle-camera' | '';
   ref: any;
 }
 
@@ -49,7 +49,7 @@ type CameraModuleProps = {
   device?: 'back' | 'front';
   flash?: 'on' | 'off' | 'auto';
   torch?: 'on' | 'off' | 'auto';
-  zoom?: number;
+  zoom?: string;
   deviceType: string;
   ref?: any;
 };

@@ -110,7 +110,7 @@ class CameraView: UIView {
     private func initCameraSession() {
         let nextLevel = NextLevel.shared
 
-        nextLevel.videoStabilizationMode = .standard
+        nextLevel.videoStabilizationMode = .auto
         nextLevel.deviceOrientation = .portrait
         nextLevel.videoConfiguration.preset = .hd1280x720
         if #available(iOS 11.0, *) {
@@ -416,10 +416,6 @@ extension CameraView {
         case .restricted:
             fallthrough
         case .denied:
-            let alertController = UIAlertController(title: "Oh no!", message: "Access denied.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            self.parentViewController?.present(alertController, animated: true, completion: nil)
             break
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) in

@@ -6,7 +6,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "ios-iphone13": "react-native run-ios --device='Kidus's iPhone'"
   },
   "dependencies": {
     "react": "16.13.1",
